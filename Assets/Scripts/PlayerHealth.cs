@@ -7,8 +7,6 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _currentHealth;
-    private float _damageCount = 10;
-    private float _healCount = 10;
 
     public event UnityAction<float> OnHealthChanged;
 
@@ -22,13 +20,11 @@ public class PlayerHealth : MonoBehaviour
         return _currentHealth;
     }
 
-    public void Heal()
+    public void Heal(float healCount)
     {
-        if(_currentHealth + _healCount < _maxHealth)
-        {
-            _currentHealth += _healCount;
-        }
-        else
+        _currentHealth += healCount;
+
+        if (_currentHealth > _maxHealth)
         {
             _currentHealth = _maxHealth;
         }
@@ -36,13 +32,11 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(_currentHealth);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float damageCount)
     {
-        if(_currentHealth - _damageCount > 0)
-        {
-            _currentHealth -= _damageCount;
-        }
-        else
+        _currentHealth -= damageCount;
+
+        if (_currentHealth < 0)
         {
             _currentHealth = 0;
         }

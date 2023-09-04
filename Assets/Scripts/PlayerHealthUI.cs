@@ -39,7 +39,10 @@ public class PlayerHealthUI : MonoBehaviour
         while(_healthSlider.value != newHealth)
         {
             float currentSliderValue = _healthSlider.value;
-            _healthSlider.value = Mathf.MoveTowards(currentSliderValue, newHealth, _sliderChangedSpeed * Time.deltaTime);
+            _healthSlider.value = Mathf.MoveTowards(
+                currentSliderValue, 
+                newHealth, 
+                _sliderChangedSpeed * Time.deltaTime);
             yield return null;
         }
     }
